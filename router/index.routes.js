@@ -15,4 +15,8 @@ router.get('/admin-usuario', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'adminuser', 'index.html'));
 });
 
+router.get('/admin-usuario/:token', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'adminuser', 'index.html'));
+});
+
 module.exports = router;
