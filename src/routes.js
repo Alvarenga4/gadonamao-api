@@ -41,7 +41,7 @@ const routes = express.Router();
 // index
 routes.get('/', (req, res) => {
   res.json({
-    projeto: 'admin api on-line',
+    projeto: 'api on-line',
     method: req.method,
     hostname: req.hostname,
     ip: req.ip
