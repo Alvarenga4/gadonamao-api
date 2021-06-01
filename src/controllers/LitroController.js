@@ -1,0 +1,85 @@
+const Litro = require('../models/Litro');
+const mongoose = require('mongoose');
+
+module.exports = {
+  async index (req, res) {
+    const data = await Litro.find().populate('unidade');
+
+    return res.json(data);
+  },
+
+  async show (req, res) {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: 'ID Litro inválido'
+      });
+    }
+
+    const data = await Litro.findOne({ _id: id });
+
+    return res.json(data);
+  },
+
+  async store (req, res) {
+    try {
+      const { valor } = req.body;
+      const litro = await Litro.findOne({ valor });
+
+      if (litro) {
+        return res.status(400).json({ message: 'Litro já cadastrado' });
+      }
+
+      const data = await Litro.create(req.body);
+
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        message:
+          'Falha no servidor!!! Não foi possivel processar a requisição.',
+        error
+      });
+    }
+  },
+
+  async update (req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({
+          message: 'ID Litro inválido'
+        });
+      }
+
+      const data = await Litro.findOneAndUpdate({ _id: id }, req.body, {
+        new: true
+      });
+
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        message:
+          'Falha no servidor!!! Não foi possivel processar a requisição.',
+        error
+      });
+    }
+  },
+
+  async delete (req, res) {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: 'ID Litro inválido'
+      });
+    }
+
+    await Litro.deleteOne({ _id: id });
+
+    return res.json({ message: 'Litro excluido com sucesso' });
+  }
+};

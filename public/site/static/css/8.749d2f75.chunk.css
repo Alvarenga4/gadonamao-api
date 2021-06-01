@@ -1,0 +1,2 @@
+.category-container{min-height:250px}.category-container img{width:100%;max-width:250px;transition:.25s}.category-container img:hover{max-width:300px}@media (max-width:576px){.category-container img{max-width:150px}.category-container img:hover{max-width:175px}}#navbar-top-fixed{position:fixed;top:-220px;width:100%;display:block;transition:top .5s;z-index:9999}
+/*# sourceMappingURL=8.749d2f75.chunk.css.map */
