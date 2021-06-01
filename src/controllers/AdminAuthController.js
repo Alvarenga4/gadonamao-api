@@ -1,6 +1,5 @@
 const Admin = require('../models/Admin');
 const Token = require('../models/Token');
-const logger = require('../logs/FileLogger');
 
 module.exports = {
   async authenticate (req, res) {
@@ -36,7 +35,6 @@ module.exports = {
         token
       });
     } catch (error) {
-      logger.error(error);
       return res.status(500).json({
         message:
           'Falha no Servidor!!! Não foi possivel realizar a autentificação do usuário',
