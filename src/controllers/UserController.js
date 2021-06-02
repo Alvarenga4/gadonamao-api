@@ -26,7 +26,6 @@ module.exports = {
   async store (req, res) {
     try {
       const { email } = req.body;
-      const { filename } = req.file;
 
       const user = await User.findOne({ email });
 
@@ -36,8 +35,7 @@ module.exports = {
 
       const data = await User.create({
         ...req.body,
-        image: filename,
-        approved: false
+        approved: true
       });
 
       /* const output = `

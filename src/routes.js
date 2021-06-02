@@ -54,7 +54,7 @@ routes.get('/', (req, res) => {
 routes.post('/authenticate', UserAuthController.authenticate);
 routes.post('/admins/authenticate', AdminAuthController.authenticate);
 
-routes.post('/users', upload.single('image'), UserController.store);
+routes.post('/users', UserController.store);
 
 routes.get('/tokens/:token', TokenController.show);
 routes.get('/tokens-admin/:token', TokenAdminController.show);
