@@ -11,6 +11,10 @@ router.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'admin', 'index.html'));
 });
 
+router.get('/admin/:token', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'admin', 'index.html'));
+});
+
 router.get('/admin-usuario', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'adminuser', 'index.html'));
 });
