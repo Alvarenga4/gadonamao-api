@@ -36,7 +36,7 @@ const CategoriaSchema = new mongoose.Schema(
     createAt: {
       type: Date,
       default: Date.now
-    }
+    },
   },
   {
     toJSON: {
@@ -47,7 +47,7 @@ const CategoriaSchema = new mongoose.Schema(
 
 CategoriaSchema.virtual('image_url').get(function () {
   return this.image
-    ? `${process.env.APP_STORAGE_URL}/image-gallery/${this.image}`
+    ? `${process.env.APP_URL}/image-gallery/${this.image}`
     : null;
 });
 

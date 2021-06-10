@@ -1,15 +1,20 @@
 const multer = require('multer');
 const path = require('path');
 const fileUtil = require('../helpers/file');
+const crypto = require('crypto');
 
 const storageTypes = {
   local: multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, path.resolve(__dirname, '..', '..', '..', 'uploads'));
+      cb(null, path.resolve(__dirname, '..', '..', 'tmp', 'image-gallery'));
     },
     filename: (req, file, cb) => {
-      const newFilename = fileUtil.getNewFilename(file.originalname);
-      cb(null, newFilename);
+     crypto.randomBytes(16, (err, hash) => {
+       if (err) cb(err);
+
+       const fileName = `${hash.toString('hex')}-${file.originalname}`;
+       cb(null, fileName);
+     })
     }
   }),
   azure: multer.memoryStorage()
@@ -31,7 +36,7 @@ const storageTypes = {
 };
 
 module.exports = {
-  dest: path.resolve(__dirname, '..', '..', '..', 'uploads'),
+  dest: path.resolve(__dirname, '..', '..', 'tmp', 'image-gallery'),
   storage: storageTypes[process.env.STORAGE_TYPE],
   /* limits: {
     fileSize: 10 * 1024 * 1024
@@ -44,7 +49,6 @@ module.exports = {
       'image/gif',
       'video/mp4'
     ];
-
     if (allowedMimes.includes(file.mimetype)) {
       cb(null, true);
     } else {

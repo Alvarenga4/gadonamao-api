@@ -53,14 +53,13 @@ module.exports = {
       let data = req.body;
 
       if (req.file) {
-        const { filename } = req.file;
+        const { originalname: image, size, filename: key } = req.file;
         data = {
           ...data,
-          image: filename
+          image: `${Math.random()}-${image}`
         };
       }
 
-      console.log(req.body);
       data = {
         ...data,
         categoria:
@@ -92,8 +91,7 @@ module.exports = {
             ? data.registros.split(',')
             : null
       };
-
-      console.log(data);
+      
       const categoria = await Categoria.create(data);
 
       res.send(categoria);

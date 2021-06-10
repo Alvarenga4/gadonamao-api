@@ -39,7 +39,7 @@ const upload = multer(uploadConfig);
 const routes = express.Router();
 
 // index
-routes.get('/', (req, res) => {
+routes.get('/check', (req, res) => {
   res.json({
     projeto: 'api on-line',
     method: req.method,
@@ -55,6 +55,7 @@ routes.post('/authenticate', UserAuthController.authenticate);
 routes.post('/admins/authenticate', AdminAuthController.authenticate);
 
 routes.post('/users', UserController.store);
+routes.get('/users', UserController.index);
 
 routes.get('/tokens/:token', TokenController.show);
 routes.get('/tokens-admin/:token', TokenAdminController.show);
