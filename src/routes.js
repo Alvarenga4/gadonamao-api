@@ -78,6 +78,8 @@ routes.patch('/compartilhados/:id', CompartilhadoController.update);
 routes.patch('/reportados/:id', ReportadoController.update);
 routes.get('/favoritados/:id', FavoritadoController.show);
 routes.patch('/favoritados/:id', FavoritadoController.update);
+routes.post('/admins', upload.single('image'), AdminController.store);
+
 
 // Private Routes
 // Requisições com Token
@@ -107,7 +109,6 @@ routes.put('/vendidos/:id', VendidoController.update);
 routes.use(AdminMiddleware);
 
 routes.get('/admins', AdminController.index);
-routes.post('/admins', upload.single('image'), AdminController.store);
 routes.get('/admins/:id', AdminController.show);
 routes.put('/admins/:id', AdminController.update);
 routes.delete('/admins/:id', AdminController.delete);
