@@ -2,7 +2,12 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const server = require('http').Server(app);
+const path = require('path');
+const fs = require('fs');
+const server = require('https').createServer({
+  key: fs.readFileSync(path.join(__dirname, '..', 'cert', 'key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, '..', 'cert', 'cert.pem'))
+}, app);
 const debug = require('debug')('integracao:server');
 const loaders = require('../src/loaders');
 
